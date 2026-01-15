@@ -1,0 +1,58 @@
+# AegisVerity Global Configuration
+
+# Video Processing
+video:
+  sampling_rate: 30  # fps for frame extraction
+  frame_size: [224, 224]  # width x height for model input
+  adaptive_sampling: true  # Use adaptive frame sampling based on motion
+
+# Audio Processing
+audio:
+  sampling_rate: 16000  # Hz
+  n_mfcc: 40  # Number of MFCC coefficients
+  hop_length: 512
+  n_fft: 2048
+
+# Face Detection
+face_detection:
+  detector: "retinaface"  # Options: retinaface, mtcnn
+  confidence_threshold: 0.9
+  min_face_size: 80  # pixels
+  alignment: true  # Enable facial landmark alignment
+
+# Model Paths
+models:
+  spatial_cnn: "models/spatial_efficientnet_b4.pth"
+  temporal_model: "models/temporal_timesformer.pth"
+  av_sync_model: "models/av_sync_detector.pth"
+
+# Detection Thresholds
+thresholds:
+  fake_probability: 0.5  # Threshold for fake classification
+  av_sync_mismatch: 0.7  # Audio-visual synchronization mismatch threshold
+  confidence_low: 0.3  # Low confidence boundary
+  confidence_high: 0.7  # High confidence boundary
+
+# Explainability
+explainability:
+  enable_gradcam: true
+  enable_attention_maps: true
+  heatmap_overlay_alpha: 0.4
+
+# Defense Mechanisms
+defense:
+  adversarial_detection: true
+  noise_injection_check: true
+
+# Output
+output:
+  save_frames: true
+  save_features: true
+  generate_report: true
+  report_format: "json"  # Options: json, html, pdf
+
+# Performance
+performance:
+  batch_size: 16
+  num_workers: 4
+  device: "cuda"  # Options: cuda, cpu, mps
